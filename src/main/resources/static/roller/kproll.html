@@ -3,7 +3,6 @@
 <head>
 <title>克苏鲁的呼唤掷骰器</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<script type="text/javascript" src="/js/ws.js"></script>
 <SCRIPT LANGUAGE="JavaScript1.2">
 <!--
 
@@ -11,16 +10,7 @@ minimumvalue = 1; // The minimum value that can be rolled by a die is set here
 
 rnd.today=new Date();
 rnd.seed=rnd.today.getTime();
-var kpflag=0;
 
-function clickCheckbox()
-{
-    if(document.getElementById('kproll').checked){
-        kpflag=1;
-    }else{
-        kpflag=0;
-    }
-}
 
 function rnd() {
 	rnd.seed = (rnd.seed*9301+49297) % 233280;
@@ -36,23 +26,9 @@ function docreset() {
 	document.form1.runningtotal.value = "     记录\n-------------------------\n这个区域将会显示你的掷骰记录.\n\n将根据给定的x、y、z生成一个掷骰结果."
 }
 
-function toResult(dxr, dxres){
-    if(kpflag==0){
-        document.form1.dxr.value = dxres;
-        rtotal = dtotal + "\n\n" + rtotal;
-        websocket.send(dtotal);
-    }else{
-        document.form1.dxr.value = dxres;
-        rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
-    }
-}
+
 
 function rolld4() {
-    if(websocket == null){
-        alert("请先输入昵称并连接");
-        return;
-    }
        
    d4rolls = parseInt(document.form1.d4n.value);  
    d4mod = parseInt(document.form1.d4mo.value);  
@@ -90,26 +66,15 @@ function rolld4() {
 	      d4res = minimumvalue;
 		  }	
 	   dtotal = dtotal + "-" + d4mod + "\n" + "总计:" + d4res	
-	}
-    if(kpflag==0){
-        document.form1.d4r.value = d4res;
-        rtotal = dtotal + "\n\n" + rtotal;
-        websocket.send(dtotal);
-    }else{
-        document.form1.d4r.value = d4res;
-        rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
-    }
+	}	
+
+   document.form1.d4r.value = d4res;
+   rtotal = dtotal + "\n\n" + rtotal;  
+   document.form1.runningtotal.value = rtotal;	
 
 }
 
 function rolld6() {
-
-    if(websocket == null){
-        alert("请先输入昵称并连接");
-        return;
-    }
-
    d6rolls = parseInt(document.form1.d6n.value);  
    d6mod = parseInt(document.form1.d6mo.value);  
    dtotal = ""
@@ -146,26 +111,14 @@ function rolld6() {
 	      d6res = minimumvalue;
 		  }	
 	   dtotal = dtotal + "-" + d6mod + "\n" + "总计:" + d6res	
-	}
+	}	
 
-    if(kpflag==0){
-        document.form1.d6r.value = d6res;
-        rtotal = dtotal + "\n\n" + rtotal;
-        websocket.send(dtotal);
-    }else{
-        document.form1.d6r.value = d6res;
-        rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
-    }
+   document.form1.d6r.value = d6res;	
+   rtotal = dtotal + "\n\n" + rtotal;  
+   document.form1.runningtotal.value = rtotal;	
 }
 
 function rolld8() {
-
-    if(websocket == null){
-        alert("请先输入昵称并连接");
-        return;
-    }
-
    d8rolls = parseInt(document.form1.d8n.value);  
    d8mod = parseInt(document.form1.d8mo.value);  
    dtotal = ""
@@ -202,26 +155,14 @@ function rolld8() {
 	      d8res = minimumvalue;
 		  }	
 	   dtotal = dtotal + "-" + d8mod + "\n" + "总计:" + d8res	
-	}
+	}	
 
-    if(kpflag==0){
-        document.form1.d8r.value = d8res;
-        rtotal = dtotal + "\n\n" + rtotal;
-        websocket.send(dtotal);
-    }else{
-        document.form1.d8r.value = d8res;
-        rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
-    }
+   document.form1.d8r.value = d8res;	
+   rtotal = dtotal + "\n\n" + rtotal;  
+   document.form1.runningtotal.value = rtotal;	
 }
 
 function rolld10() {
-
-    if(websocket == null){
-        alert("请先输入昵称并连接");
-        return;
-    }
-
    d10rolls = parseInt(document.form1.d10n.value);  
    d10mod = parseInt(document.form1.d10mo.value);  
    dtotal = ""
@@ -258,26 +199,14 @@ function rolld10() {
 	      d10res = minimumvalue;
 		  }	
 	   dtotal = dtotal + "-" + d10mod + "\n" + "总计:" + d10res	
-	}
+	}	
 
-    if(kpflag==0){
-        document.form1.d10r.value = d10res;
-        rtotal = dtotal + "\n\n" + rtotal;
-        websocket.send(dtotal);
-    }else{
-        document.form1.d10r.value = d10res;
-        rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
-    }
+   document.form1.d10r.value = d10res;	
+   rtotal = dtotal + "\n\n" + rtotal;  
+   document.form1.runningtotal.value = rtotal;	
 }
 
 function rolld12() {
-
-    if(websocket == null){
-        alert("请先输入昵称并连接");
-        return;
-    }
-
    d12rolls = parseInt(document.form1.d12n.value);  
    d12mod = parseInt(document.form1.d12mo.value);  
    dtotal = ""
@@ -314,26 +243,14 @@ function rolld12() {
 	      d12res = minimumvalue;
 		  }	
 	   dtotal = dtotal + "-" + d12mod + "\n" + "总计:" + d12res	
-	}
+	}	
 
-    if(kpflag==0){
-        document.form1.d12r.value = d12res;
-        rtotal = dtotal + "\n\n" + rtotal;
-        websocket.send(dtotal);
-    }else{
-        document.form1.d12r.value = d12res;
-        rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
-    }
+   document.form1.d12r.value = d12res;	
+   rtotal = dtotal + "\n\n" + rtotal;  
+   document.form1.runningtotal.value = rtotal;	
 }
 
 function rolld20() {
-
-    if(websocket == null){
-        alert("请先输入昵称并连接");
-        return;
-    }
-
    d20rolls = parseInt(document.form1.d20n.value);  
    d20mod = parseInt(document.form1.d20mo.value);  
    dtotal = ""
@@ -370,26 +287,14 @@ function rolld20() {
 	      d20res = minimumvalue;
 		  }	
 	   dtotal = dtotal + "-" + d20mod + "\n" + "总计:" + d20res	
-	}
+	}	
 
-    if(kpflag==0){
-        document.form1.d20r.value = d20res;
-        rtotal = dtotal + "\n\n" + rtotal;
-        websocket.send(dtotal);
-    }else{
-        document.form1.d20r.value = d20res;
-        rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
-    }
+   document.form1.d20r.value = d20res;	
+   rtotal = dtotal + "\n\n" + rtotal;  
+   document.form1.runningtotal.value = rtotal;	
 }
 
 function rolld100() {
-
-    if(websocket == null){
-        alert("请先输入昵称并连接");
-        return;
-    }
-
    d100rolls = parseInt(document.form1.d100n.value);  
    d100mod = parseInt(document.form1.d100mo.value);  
    dtotal = ""
@@ -426,36 +331,19 @@ function rolld100() {
 	      d100res = minimumvalue;
 		  }	
 	   dtotal = dtotal + "-" + d100mod + "\n" + "总计:" + d100res	
-	}
+	}	
 
-    if(kpflag==0){
-        document.form1.d100r.value = d100res;
-        rtotal = dtotal + "\n\n" + rtotal;
-        websocket.send(dtotal);
-    }else{
-        document.form1.d100r.value = d100res;
-        rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
-    }
+   document.form1.d100r.value = d100res;	
+   rtotal = dtotal + "\n\n" + rtotal;  
+   document.form1.runningtotal.value = rtotal;	
 }
 
 function rolldX() {
-
-    if(websocket == null){
-        alert("请先输入昵称并连接");
-        return;
-    }
-
    dXrolls = parseInt(document.form1.dXn.value);  
    dXmod = parseInt(document.form1.dXmo.value);  
    dXsides = parseInt(document.form1.dXs.value);     
    dtotal = ""
    dXres = 0
-
-    if(dXrolls>10){
-       alert("大佬，你真的用投这么多骰子吗？不给！");
-       return;
-    }
    rtotal = document.form1.runningtotal.value; 
   
 	for (i=0; i<2; i++) {
@@ -488,17 +376,11 @@ function rolldX() {
 	      dXres = minimumvalue;
 		  }	
 	   dtotal = dtotal + "-" + dXmod + "\n" + "总计:" + dXres	
-	}
+	}	
 
-    if(kpflag==0){
-        document.form1.dXr.value = dXres;
-        rtotal = dtotal + "\n\n" + rtotal;
-        websocket.send(dtotal);
-    }else{
-        document.form1.dXr.value = dXres;
-        rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
-    }
+   document.form1.dXr.value = dXres;	
+   rtotal = dtotal + "\n\n" + rtotal;  
+   document.form1.runningtotal.value = rtotal;	
 }
 
 function MM_swapImgRestore() { //v2.0
@@ -507,9 +389,9 @@ function MM_swapImgRestore() { //v2.0
       document.MM_swapImgData[i].src = document.MM_swapImgData[i+1];
 }
 
-function MM_preloadimages() { //v2.0
+function MM_preloadImages() { //v2.0
   if (document.images) {
-    var imgFiles = MM_preloadimages.arguments;
+    var imgFiles = MM_preloadImages.arguments;
     if (document.preloadArray==null) document.preloadArray = new Array();
     var i = document.preloadArray.length;
     with (document) for (var j=0; j<imgFiles.length; j++) if (imgFiles[j].charAt(0)!="#"){
@@ -575,15 +457,7 @@ color: #ffffff
 -->
 </style> 
 
-<body bgcolor="#FFFFFF" background="/images/back2.jpg">
-
-<div style="background-color:#000000; width: 500"align="center"><font face="Arial, Helvetica, sans-serif" size="2"><b><font color="#FFFFCC">克苏鲁的呼唤登录</font></b></font></div>
-<div style="background-color:#ffffff; width: 500; height: 50;" align="center">
-<span style="top:50%;">请输入昵称：</span>
-<input id="nickName" type="text" />&nbsp;&nbsp;&nbsp;<button onclick="openConnect()">连接</button> &nbsp;&nbsp;&nbsp;<button onclick="closeWebSocket()">Close</button>
-<div id="message">
-</div>
-</div>
+<body bgcolor="#FFFFFF" background="images/back2.jpg">
 
 <form method="post" action="" name="form1">
 
@@ -594,12 +468,12 @@ color: #ffffff
     </td> 
 </tr>
  <tr>
-    <td width="3" height="3"><img src="/images/TOP_L.gif" width="3" height="3"></td>
-    <td background="/images/TOP_M.gif"><img src="/images/TOP_M.gif" width="3" height="3"></td>
-    <td width="3" height="3"><img src="/images/TOP_R.gif" width="3" height="3"></td>
+    <td width="3" height="3"><img src="images/TOP_L.gif" width="3" height="3"></td>
+    <td background="images/TOP_M.gif"><img src="images/TOP_M.gif" width="3" height="3"></td>
+    <td width="3" height="3"><img src="images/TOP_R.gif" width="3" height="3"></td>
   </tr>
   <tr>
-    <td background="/images/Side_L.gif"><img src="/images/Side_L.gif" width="3" height="3"></td>
+    <td background="images/Side_L.gif"><img src="images/Side_L.gif" width="3" height="3"></td>
     <td valign="top"> 
 
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -609,20 +483,19 @@ color: #ffffff
             <td align="center" valign="bottom"><font size="2" face="Arial, Helvetica, sans-serif"><b> 
               数量</b></font></td>
 			<td  ></td>
-            <td align="center" valign="bottom"><img src="/images/plusminus.jpg" ></td>
+            <td align="center" valign="bottom"><img src="images/plusminus.jpg" ></td>
             <td align="center" valign="bottom"><font face="Arial, Helvetica, sans-serif" size="2"><b>修正值</b></font></td>
             <td align="center">&nbsp;</td>
             <td align="center" valign="bottom"><font size="2" face="Arial, Helvetica, sans-serif"><b>结果</b></font></td>
             <td align="center">&nbsp;</td>
-            <td align="center" valign="bottom"><input type="checkbox" onclick="clickCheckbox()" id="kproll"><font size="2" face="Arial, Helvetica, sans-serif"><b>暗投</b></font></td>
-            <td align="center">&nbsp;</td>
+            <td align="center" valign="bottom"><input type="checkbox" id="kproll"><font size="2" face="Arial, Helvetica, sans-serif"><b>暗投</b></font></td>
             <td>&nbsp;</td>
           </tr>
           <tr align="center"> 
-            <td colspan="9"><font size="2" face="Arial, Helvetica, sans-serif"></font><font face="Arial, Helvetica, sans-serif" size="2"></font><font size="2" face="Arial, Helvetica, sans-serif"><img src="/images/grey.jpg" width="485" height="3"></font></td>
+            <td colspan="9"><font size="2" face="Arial, Helvetica, sans-serif"></font><font face="Arial, Helvetica, sans-serif" size="2"></font><font size="2" face="Arial, Helvetica, sans-serif"><img src="images/grey.jpg" width="485" height="3"></font></td>
           </tr>
           <tr> 
-            <td  align="center"  ><a href="javascript:void(null)" onClick="rolld4()" ><img src="/images/d4a.jpg" width="38" height="37" border="0" alt="d4" name="d4" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d4','document.d4','/images/d4b.jpg')"></a></td>
+            <td  align="center"  ><a href="javascript:void(null)" onClick="rolld4()" ><img src="images/d4a.jpg" width="38" height="37" border="0" alt="d4" name="d4" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d4','document.d4','images/d4b.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d4n" size="3" maxlength="3" value="1">
             </td>
@@ -632,13 +505,13 @@ color: #ffffff
             <td align="center"> 
               <input type="text" name="d4mo" size="3" maxlength="3" value="0">
             </td>
-            <td valign="middle" align="center"> <a href="javascript:void(null)" onClick="rolld4()" ><img src="/images/roll1.jpg" border="0" alt="Roll d4" name="r4" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r4','document.r4','/images/roll2.jpg')"></a></td>
+            <td valign="middle" align="center"> <a href="javascript:void(null)" onClick="rolld4()" ><img src="images/roll1.jpg" border="0" alt="Roll d4" name="r4" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r4','document.r4','images/roll2.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d4r" size="5" maxlength="5">
             </td>
-            <td align="center"><img src="/images/white.jpg" width="5" height="13"> 
+            <td align="center"><img src="images/white.jpg" width="5" height="13"> 
             </td>
-            <td rowspan="13" valign="top" align="center"> <img src="/images/white.gif" width="3" height="5"><br>
+            <td rowspan="13" valign="top" align="center"> <img src="images/white.gif" width="3" height="5"><br>
               <textarea name="runningtotal" cols="25" rows="17"></textarea>
 									<SCRIPT LANGUAGE="JavaScript1.2">
 <!--
@@ -648,10 +521,10 @@ document.form1.runningtotal.value = "     记录\n-------------------------\n这
             </td>
           </tr>
           <tr> 
-            <td valign="middle" align="center" colspan="8"><img src="/images/grey.jpg" width="327" height="3"></td>
+            <td valign="middle" align="center" colspan="8"><img src="images/grey.jpg" width="327" height="3"></td>
           </tr>
           <tr> 
-            <td  align="center"  ><a href="javascript:void(null)" onClick="rolld6()" ><img src="/images/d6a.jpg" width="38" height="37" border="0" alt="d6" name="d6" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d6','document.d6','/images/d6b.jpg')"></a></td>
+            <td  align="center"  ><a href="javascript:void(null)" onClick="rolld6()" ><img src="images/d6a.jpg" width="38" height="37" border="0" alt="d6" name="d6" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d6','document.d6','images/d6b.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d6n" size="3" maxlength="3" value="1">
             </td>
@@ -660,18 +533,18 @@ document.form1.runningtotal.value = "     记录\n-------------------------\n这
             <td align="center"> 
               <input type="text" name="d6mo" size="3" maxlength="3" value="0">
             </td>
-            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld6()"  ><img src="/images/roll1.jpg" border="0" alt="Roll d6" name="r6" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r6','document.r6','/images/roll2.jpg')"></a></td>
+            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld6()"  ><img src="images/roll1.jpg" border="0" alt="Roll d6" name="r6" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r6','document.r6','images/roll2.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d6r" size="5" maxlength="5">
             </td>
-            <td align="center"><img src="/images/white.jpg" width="5" height="13"> 
+            <td align="center"><img src="images/white.jpg" width="5" height="13"> 
             </td>
           </tr>
           <tr> 
-            <td valign="middle" align="center" colspan="8"><img src="/images/grey.jpg" width="327" height="3"></td>
+            <td valign="middle" align="center" colspan="8"><img src="images/grey.jpg" width="327" height="3"></td>
           </tr>
           <tr> 
-            <td align="center"  ><a href="javascript:void(null)" onClick="rolld8()" ><img src="/images/d8a.jpg" width="38" height="37" border="0" alt="d8" name="d8" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d8','document.d8','/images/d8b.jpg')"></a></td>
+            <td align="center"  ><a href="javascript:void(null)" onClick="rolld8()" ><img src="images/d8a.jpg" width="38" height="37" border="0" alt="d8" name="d8" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d8','document.d8','images/d8b.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d8n" size="3" maxlength="3" value="1">
             </td>
@@ -680,18 +553,18 @@ document.form1.runningtotal.value = "     记录\n-------------------------\n这
             <td align="center"> 
               <input type="text" name="d8mo" size="3" maxlength="3" value="0">
             </td>
-            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld8()"  ><img src="/images/roll1.jpg" border="0" alt="Roll d8" name="r8" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r8','document.r8','/images/roll2.jpg')"></a></td>
+            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld8()"  ><img src="images/roll1.jpg" border="0" alt="Roll d8" name="r8" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r8','document.r8','images/roll2.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d8r" size="5" maxlength="5">
             </td>
-            <td align="center"><img src="/images/white.jpg" width="5" height="13"> 
+            <td align="center"><img src="images/white.jpg" width="5" height="13"> 
             </td>
           </tr>
           <tr> 
-            <td valign="middle" align="center" colspan="8"><img src="/images/grey.jpg" width="327" height="3"></td>
+            <td valign="middle" align="center" colspan="8"><img src="images/grey.jpg" width="327" height="3"></td>
           </tr>
           <tr> 
-            <td  align="center"  ><a href="javascript:void(null)" onClick="rolld10()" ><img src="/images/d10a.jpg" width="38" height="37" border="0" alt="d10" name="d10" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d10','document.d10','/images/d10b.jpg')"></a></td>
+            <td  align="center"  ><a href="javascript:void(null)" onClick="rolld10()" ><img src="images/d10a.jpg" width="38" height="37" border="0" alt="d10" name="d10" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d10','document.d10','images/d10b.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d10n" size="3" maxlength="3" value="1">
             </td>
@@ -700,18 +573,18 @@ document.form1.runningtotal.value = "     记录\n-------------------------\n这
             <td align="center"> 
               <input type="text" name="d10mo" size="3" maxlength="3" value="0">
             </td>
-            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld10()"  ><img src="/images/roll1.jpg" border="0" alt="Roll d10" name="r10" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r10','document.r10','/images/roll2.jpg')"></a></td>
+            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld10()"  ><img src="images/roll1.jpg" border="0" alt="Roll d10" name="r10" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r10','document.r10','images/roll2.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d10r" size="5" maxlength="5">
             </td>
-            <td align="center"><img src="/images/white.jpg" width="5" height="13"> 
+            <td align="center"><img src="images/white.jpg" width="5" height="13"> 
             </td>
           </tr>
           <tr> 
-            <td valign="middle" align="center" colspan="8"><img src="/images/grey.jpg" width="327" height="3"></td>
+            <td valign="middle" align="center" colspan="8"><img src="images/grey.jpg" width="327" height="3"></td>
           </tr>
           <tr> 
-            <td  align="center" ><a href="javascript:void(null)" onClick="rolld100()" ><img src="/images/d100a.jpg" width="38" height="37" border="0" alt="d100" name="d100" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d100','document.d100','/images/d100b.jpg')"></a></td>
+            <td  align="center" ><a href="javascript:void(null)" onClick="rolld100()" ><img src="images/d100a.jpg" width="38" height="37" border="0" alt="d100" name="d100" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d100','document.d100','images/d100b.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d100n" size="3" maxlength="3" value="1">
             </td>
@@ -720,18 +593,18 @@ document.form1.runningtotal.value = "     记录\n-------------------------\n这
             <td align="center"> 
               <input type="text" name="d100mo" size="3" maxlength="3" value="0">
             </td>
-            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld100()"  ><img src="/images/roll1.jpg" border="0" alt="Roll d100" name="r100" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r100','document.r100','/images/roll2.jpg')"></a></td>
+            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld100()"  ><img src="images/roll1.jpg" border="0" alt="Roll d100" name="r100" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r100','document.r100','images/roll2.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d100r" size="5" maxlength="5">
             </td>
-            <td align="center"><img src="/images/white.jpg" width="5" height="13"> 
+            <td align="center"><img src="images/white.jpg" width="5" height="13"> 
             </td>
           </tr>
           <tr> 
-            <td valign="middle" align="center" colspan="8"><img src="/images/grey.jpg" width="327" height="3"></td>
+            <td valign="middle" align="center" colspan="8"><img src="images/grey.jpg" width="327" height="3"></td>
           </tr>
           <tr> 
-            <td  align="center" ><a href="javascript:void(null)" onClick="rolld12()" ><img src="/images/d12a.jpg" width="38" height="37" border="0" alt="d12" name="d12" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d12','document.d12','/images/d12b.jpg')"></a></td>
+            <td  align="center" ><a href="javascript:void(null)" onClick="rolld12()" ><img src="images/d12a.jpg" width="38" height="37" border="0" alt="d12" name="d12" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d12','document.d12','images/d12b.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d12n" size="3" maxlength="3" value="1">
             </td>
@@ -740,18 +613,18 @@ document.form1.runningtotal.value = "     记录\n-------------------------\n这
             <td align="center"> 
               <input type="text" name="d12mo" size="3" maxlength="3" value="0">
             </td>
-            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld12()"  ><img src="/images/roll1.jpg" border="0" alt="Roll d12" name="r12" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r12','document.r12','/images/roll2.jpg')"></a></td>
+            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld12()"  ><img src="images/roll1.jpg" border="0" alt="Roll d12" name="r12" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r12','document.r12','images/roll2.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d12r" size="5" maxlength="5">
             </td>
-            <td align="center"><img src="/images/white.jpg" width="5" height="13"> 
+            <td align="center"><img src="images/white.jpg" width="5" height="13"> 
             </td>
           </tr>
           <tr> 
-            <td valign="middle" align="center" colspan="8"><img src="/images/grey.jpg" width="327" height="3"></td>
+            <td valign="middle" align="center" colspan="8"><img src="images/grey.jpg" width="327" height="3"></td>
           </tr>
           <tr> 
-            <td  align="center" ><a href="javascript:void(null)" onClick="rolld20()" ><img src="/images/d20a.jpg" width="38" height="37" border="0" alt="d20" name="d20" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d20','document.d20','/images/d20b.jpg')"></a></td>
+            <td  align="center" ><a href="javascript:void(null)" onClick="rolld20()" ><img src="images/d20a.jpg" width="38" height="37" border="0" alt="d20" name="d20" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.d20','document.d20','images/d20b.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d20n" size="3" maxlength="3" value="1">
             </td>
@@ -760,48 +633,46 @@ document.form1.runningtotal.value = "     记录\n-------------------------\n这
             <td align="center"> 
               <input type="text" name="d20mo" size="3" maxlength="3" value="0">
             </td>
-            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld20()"  ><img src="/images/roll1.jpg" border="0" alt="Roll d20" name="r20" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r20','document.r20','/images/roll2.jpg')"></a></td>
+            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolld20()"  ><img src="images/roll1.jpg" border="0" alt="Roll d20" name="r20" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.r20','document.r20','images/roll2.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="d20r" size="5" maxlength="5">
             </td>
-            <td align="center"><img src="/images/white.jpg" width="5" height="13"> 
+            <td align="center"><img src="images/white.jpg" width="5" height="13"> 
             </td>
           </tr>
 		  
           <tr> 
-            <td valign="middle" align="center" colspan="8"><img src="/images/grey.jpg" width="327" height="3"></td>
+            <td valign="middle" align="center" colspan="8"><img src="images/grey.jpg" width="327" height="3"></td>
           </tr>		  
 
           <tr> 
-            <td align="center" >
+            <td   align="center" ><input type="text" name="dXs" size="3" maxlength="3" value="1"></a></td>
+            <td align="center"> 
               <input type="text" name="dXn" size="3" maxlength="3" value="1">
             </td>
-            <td align="center">
-              <input type="text" name="dXs" size="3" maxlength="3" value="1"></a>
-            </td>
-            <td valign="middle" align="left"><b><font face="Arial, Helvetica, sans-serif" size="1">dX</font></b></td>
+            <td  valign="middle" align="left"><b><font face="Arial, Helvetica, sans-serif" size="1">dX</font></b></td>
             <td align="center" valign="middle"><input type="radio" name="dXm" value="P" checked   class="radioStyle"><input type="radio" name="dXm" value="M"   class="radioStyle"></td>
             <td align="center"> 
               <input type="text" name="dXmo" size="3" maxlength="3" value="0">
             </td>
-            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolldX()"  ><img src="/images/roll1.jpg" border="0" alt="Roll dX" name="rX" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.rX','document.rX','/images/roll2.jpg')"></a></td>
+            <td valign="middle" align="center"><a href="javascript:void(null)" onClick="rolldX()"  ><img src="images/roll1.jpg" border="0" alt="Roll dX" name="rX" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.rX','document.rX','images/roll2.jpg')"></a></td>
             <td align="center"> 
               <input type="text" name="dXr" size="5" maxlength="5">
             </td>
-            <td align="center"><img src="/images/white.jpg" width="5" height="37"> 
+            <td align="center"><img src="images/white.jpg" width="5" height="37"> 
             </td>
-            <td valign="middle" align="center"> <a href="javascript:void(null)" onClick="docreset()"  ><img src="/images/reset1.jpg" width="50" height="22" border="0" alt="Reset" name="Reset" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.Reset','document.Reset','/images/reset2.jpg')"></a><br/><img src="/images/white.jpg" width="5" height="5"></td>
+            <td valign="middle" align="center"> <a href="javascript:void(null)" onClick="docreset()"  ><img src="images/reset1.jpg" width="50" height="22" border="0" alt="Reset" name="Reset" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.Reset','document.Reset','images/reset2.jpg')"></a><br/><img src="images/white.jpg" width="5" height="5"></td>
           </tr>
 
 		  
         </table>
     </td>
-    <td background="/images/Side_R.gif"><img src="/images/Side_R.gif" width="3" height="3"></td>
+    <td background="images/Side_R.gif"><img src="images/Side_R.gif" width="3" height="3"></td>
   </tr>
   <tr>
-    <td><img src="/images/Bottom_L.gif" width="3" height="3"></td>
-    <td background="/images/Bottom_M.gif"><img src="/images/Bottom_M.gif" width="3" height="3"></td>
-    <td><img src="/images/Bottom_R.gif" width="3" height="3"></td>
+    <td><img src="images/Bottom_L.gif" width="3" height="3"></td>
+    <td background="images/Bottom_M.gif"><img src="images/Bottom_M.gif" width="3" height="3"></td>
+    <td><img src="images/Bottom_R.gif" width="3" height="3"></td>
   </tr>
     <tr bgcolor="#000000"  align="center"> 
       <td colspan="3" valign="middle" height="17"> 

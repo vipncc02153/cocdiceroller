@@ -27,7 +27,8 @@ function openConnect(){
 			if(event.data.substr(0,6)=="当前房间有："){
 				setMessageInnerHTML(event.data);
 			}else{
-				document.form1.runningtotal.value = event.data;
+                rtotal = document.form1.runningtotal.value;
+				document.form1.runningtotal.value = event.data + "\n\n" + rtotal;
 			}
 		}
 
@@ -53,6 +54,7 @@ function openConnect(){
 //关闭连接
 function closeWebSocket(){
 	websocket.close();
+    websocket=null;
 }
 
 //发送消息
