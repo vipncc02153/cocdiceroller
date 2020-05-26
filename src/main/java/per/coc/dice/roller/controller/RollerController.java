@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.websocket.Session;
 
 @Controller
+@RequestMapping("/system")
 public class RollerController {
 
     @RequestMapping("roll")
@@ -27,5 +28,23 @@ public class RollerController {
         Integer count = WebSocketTest.getOnlineCount();
         request.setAttribute("count", count);
         return count;
+    }
+
+    @RequestMapping("memberNumber")
+    @ResponseBody
+    public Integer memberNumber(){
+        Integer count = WebSocketTest.getOnlineCount();
+        return count;
+    }
+
+    @RequestMapping("sendInfo")
+    @ResponseBody
+    public void sendInfo(){
+        String message = "系统提示：你被杀了";
+        try {
+            WebSocketTest.sendInfo(message);
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 }

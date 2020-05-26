@@ -1,6 +1,8 @@
 package per.coc.dice.roller.webScoket;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import per.coc.dice.roller.service.RollerService;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -25,6 +27,9 @@ public class WebSocketTest {
     private Session session;
 
     private String nickName;
+
+    @Autowired
+    RollerService rollerService;
 
     /**
      * 连接建立成功调用的方法

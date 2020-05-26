@@ -16,9 +16,9 @@ var kpflag=0;
 function clickCheckbox()
 {
     if(document.getElementById('kproll').checked){
-        kpflag=1;
+        kpflag = 1;
     }else{
-        kpflag=0;
+        kpflag = 0;
     }
 }
 
@@ -33,23 +33,24 @@ function rand(number) {
 
 function docreset() {
 	document.form1.reset();
-	document.form1.runningtotal.value = "     记录\n-------------------------\n这个区域将会显示你的掷骰记录.\n\n将根据给定的x、y、z生成一个掷骰结果."
+	document.form1.runningtotal.value = "     记录\n-------------------------\n这个区域将会显示所有的掷骰记录.\n\n将根据给定的x、y、z生成一个掷骰结果."
 }
 
 function toResult(dxr, dxres){
-    if(kpflag==0){
+    if(kpflag===0){
         document.form1.dxr.value = dxres;
         rtotal = dtotal + "\n\n" + rtotal;
         websocket.send(dtotal);
     }else{
         document.form1.dxr.value = dxres;
         rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
+      websocket.send("kp执行了暗投");
+      document.form1.runningtotal.value = rtotal;
     }
 }
 
 function rolld4() {
-    if(websocket == null){
+    if(websocket === null){
         alert("请先输入昵称并连接");
         return;
     }
@@ -65,11 +66,11 @@ function rolld4() {
 		d4pm = i }
 	}
 
-	if (d4pm == 0) {
+	if (d4pm === 0) {
         dtotal = dtotal + "Roll(" + d4rolls.toString() + "d4" + ")+" +  d4mod.toString() + ":\n" 
 	}	
 
-	if (d4pm == 1) {
+	if (d4pm === 1) {
         dtotal = dtotal +  "Roll(" + d4rolls.toString() + "d4" + ")-" +  d4mod.toString() + ":\n" 
 	}	
 	
@@ -79,12 +80,12 @@ function rolld4() {
 	   dtotal = dtotal + d4.toString() + ","	
   	}
 
-	if (d4pm == 0) {
+	if (d4pm === 0) {
        d4res = d4res + d4mod;	
 	   dtotal = dtotal + "+" + d4mod + "\n" + "总计:" + d4res	
 	}	
  
-	if (d4pm == 1) {
+	if (d4pm === 1) {
        d4res = d4res - d4mod;
 	   if (d4res <= minimumvalue) {
 	      d4res = minimumvalue;
@@ -98,14 +99,16 @@ function rolld4() {
     }else{
         document.form1.d4r.value = d4res;
         rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
+      websocket.send("kp执行了暗投");
+
+      document.form1.runningtotal.value = rtotal;
     }
 
 }
 
 function rolld6() {
 
-    if(websocket == null){
+    if(websocket === null){
         alert("请先输入昵称并连接");
         return;
     }
@@ -121,11 +124,11 @@ function rolld6() {
 		d6pm = i }
 	}
 
-	if (d6pm == 0) {
+	if (d6pm === 0) {
         dtotal = dtotal + "Roll(" + d6rolls.toString() + "d6" + ")+" +  d6mod.toString() + ":\n" 
 	}	
 
-	if (d6pm == 1) {
+	if (d6pm === 1) {
         dtotal = dtotal +  "Roll(" + d6rolls.toString() + "d6" + ")-" +  d6mod.toString() + ":\n" 
 	}	
 	
@@ -135,12 +138,12 @@ function rolld6() {
 	   dtotal = dtotal + d6.toString() + ","	
   	}
 
-	if (d6pm == 0) {
+	if (d6pm === 0) {
        d6res = d6res + d6mod;	
 	   dtotal = dtotal + "+" + d6mod + "\n" + "总计:" + d6res	
 	}	
  
-	if (d6pm == 1) {
+	if (d6pm === 1) {
        d6res = d6res - d6mod;
 	   if (d6res <= minimumvalue) {
 	      d6res = minimumvalue;
@@ -155,13 +158,15 @@ function rolld6() {
     }else{
         document.form1.d6r.value = d6res;
         rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
+      websocket.send("kp执行了暗投");
+
+      document.form1.runningtotal.value = rtotal;
     }
 }
 
 function rolld8() {
 
-    if(websocket == null){
+    if(websocket === null){
         alert("请先输入昵称并连接");
         return;
     }
@@ -177,11 +182,11 @@ function rolld8() {
 		d8pm = i }
 	}
 
-	if (d8pm == 0) {
+	if (d8pm === 0) {
         dtotal = dtotal + "Roll(" + d8rolls.toString() + "d8" + ")+" +  d8mod.toString() + ":\n" 
 	}	
 
-	if (d8pm == 1) {
+	if (d8pm === 1) {
         dtotal = dtotal +  "Roll(" + d8rolls.toString() + "d8" + ")-" +  d8mod.toString() + ":\n" 
 	}	
 	
@@ -191,12 +196,12 @@ function rolld8() {
 	   dtotal = dtotal + d8.toString() + ","	
   	}
 
-	if (d8pm == 0) {
+	if (d8pm === 0) {
        d8res = d8res + d8mod;	
 	   dtotal = dtotal + "+" + d8mod + "\n" + "总计:" + d8res	
 	}	
  
-	if (d8pm == 1) {
+	if (d8pm === 1) {
        d8res = d8res - d8mod;
 	   if (d8res <= minimumvalue) {
 	      d8res = minimumvalue;
@@ -204,20 +209,21 @@ function rolld8() {
 	   dtotal = dtotal + "-" + d8mod + "\n" + "总计:" + d8res	
 	}
 
-    if(kpflag==0){
+    if(kpflag===0){
         document.form1.d8r.value = d8res;
         rtotal = dtotal + "\n\n" + rtotal;
         websocket.send(dtotal);
     }else{
         document.form1.d8r.value = d8res;
         rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
+      websocket.send("kp执行了暗投");
+      document.form1.runningtotal.value = rtotal;
     }
 }
 
 function rolld10() {
 
-    if(websocket == null){
+    if(websocket === null){
         alert("请先输入昵称并连接");
         return;
     }
@@ -233,11 +239,11 @@ function rolld10() {
 		d10pm = i }
 	}
 
-	if (d10pm == 0) {
+	if (d10pm === 0) {
         dtotal = dtotal + "Roll(" + d10rolls.toString() + "d10" + ")+" +  d10mod.toString() + ":\n" 
 	}	
 
-	if (d10pm == 1) {
+	if (d10pm === 1) {
         dtotal = dtotal +  "Roll(" + d10rolls.toString() + "d10" + ")-" +  d10mod.toString() + ":\n" 
 	}	
 	
@@ -247,12 +253,12 @@ function rolld10() {
 	   dtotal = dtotal + d10.toString() + ","	
   	}
 
-	if (d10pm == 0) {
+	if (d10pm === 0) {
        d10res = d10res + d10mod;	
 	   dtotal = dtotal + "+" + d10mod + "\n" + "总计:" + d10res	
 	}	
  
-	if (d10pm == 1) {
+	if (d10pm === 1) {
        d10res = d10res - d10mod;
 	   if (d10res <= minimumvalue) {
 	      d10res = minimumvalue;
@@ -273,7 +279,7 @@ function rolld10() {
 
 function rolld12() {
 
-    if(websocket == null){
+    if(websocket === null){
         alert("请先输入昵称并连接");
         return;
     }
@@ -289,11 +295,11 @@ function rolld12() {
 		d12pm = i }
 	}
 
-	if (d12pm == 0) {
+	if (d12pm === 0) {
         dtotal = dtotal + "Roll(" + d12rolls.toString() + "d12" + ")+" +  d12mod.toString() + ":\n" 
 	}	
 
-	if (d12pm == 1) {
+	if (d12pm === 1) {
         dtotal = dtotal +  "Roll(" + d12rolls.toString() + "d12" + ")-" +  d12mod.toString() + ":\n" 
 	}	
 	
@@ -303,12 +309,12 @@ function rolld12() {
 	   dtotal = dtotal + d12.toString() + ","	
   	}
 
-	if (d12pm == 0) {
+	if (d12pm === 0) {
        d12res = d12res + d12mod;	
 	   dtotal = dtotal + "+" + d12mod + "\n" + "总计:" + d12res	
 	}	
  
-	if (d12pm == 1) {
+	if (d12pm === 1) {
        d12res = d12res - d12mod;
 	   if (d12res <= minimumvalue) {
 	      d12res = minimumvalue;
@@ -323,13 +329,14 @@ function rolld12() {
     }else{
         document.form1.d12r.value = d12res;
         rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
+      websocket.send("kp执行了暗投");
+      document.form1.runningtotal.value = rtotal;
     }
 }
 
 function rolld20() {
 
-    if(websocket == null){
+    if(websocket === null){
         alert("请先输入昵称并连接");
         return;
     }
@@ -345,11 +352,11 @@ function rolld20() {
 		d20pm = i }
 	}
 
-	if (d20pm == 0) {
+	if (d20pm === 0) {
         dtotal = dtotal + "Roll(" + d20rolls.toString() + "d20" + ")+" +  d20mod.toString() + ":\n" 
 	}	
 
-	if (d20pm == 1) {
+	if (d20pm === 1) {
         dtotal = dtotal +  "Roll(" + d20rolls.toString() + "d20" + ")-" +  d20mod.toString() + ":\n" 
 	}	
 	
@@ -359,12 +366,12 @@ function rolld20() {
 	   dtotal = dtotal + d20.toString() + ","	
   	}
 
-	if (d20pm == 0) {
+	if (d20pm === 0) {
        d20res = d20res + d20mod;	
 	   dtotal = dtotal + "+" + d20mod + "\n" + "总计:" + d20res	
 	}	
  
-	if (d20pm == 1) {
+	if (d20pm === 1) {
        d20res = d20res - d20mod;
 	   if (d20res <= minimumvalue) {
 	      d20res = minimumvalue;
@@ -379,13 +386,14 @@ function rolld20() {
     }else{
         document.form1.d20r.value = d20res;
         rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
+      websocket.send("kp执行了暗投");
+      document.form1.runningtotal.value = rtotal;
     }
 }
 
 function rolld100() {
 
-    if(websocket == null){
+    if(websocket === null){
         alert("请先输入昵称并连接");
         return;
     }
@@ -401,11 +409,11 @@ function rolld100() {
 		d100pm = i }
 	}
 
-	if (d100pm == 0) {
+	if (d100pm === 0) {
         dtotal = dtotal + "Roll(" + d100rolls.toString() + "d100" + ")+" +  d100mod.toString() + ":\n" 
 	}	
 
-	if (d100pm == 1) {
+	if (d100pm === 1) {
         dtotal = dtotal +  "Roll(" + d100rolls.toString() + "d100" + ")-" +  d100mod.toString() + ":\n" 
 	}	
 	
@@ -415,12 +423,12 @@ function rolld100() {
 	   dtotal = dtotal + d100.toString() + ","	
   	}
 
-	if (d100pm == 0) {
+	if (d100pm === 0) {
        d100res = d100res + d100mod;	
 	   dtotal = dtotal + "+" + d100mod + "\n" + "总计:" + d100res	
 	}	
  
-	if (d100pm == 1) {
+	if (d100pm === 1) {
        d100res = d100res - d100mod;
 	   if (d100res <= minimumvalue) {
 	      d100res = minimumvalue;
@@ -435,13 +443,14 @@ function rolld100() {
     }else{
         document.form1.d100r.value = d100res;
         rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
+      websocket.send("kp执行了暗投");
+      document.form1.runningtotal.value = rtotal;
     }
 }
 
 function rolldX() {
 
-    if(websocket == null){
+    if(websocket === null){
         alert("请先输入昵称并连接");
         return;
     }
@@ -463,11 +472,11 @@ function rolldX() {
 		dXpm = i }
 	}
 
-	if (dXpm == 0) {
+	if (dXpm === 0) {
         dtotal = dtotal + "Roll(" + dXrolls.toString() + "d" + dXsides + ")+" +  dXmod.toString() + ":\n" 
 	}	
 
-	if (dXpm == 1) {
+	if (dXpm === 1) {
         dtotal = dtotal +  "Roll(" + dXrolls.toString() + "d" + dXsides + ")-" +  dXmod.toString() + ":\n" 
 	}	
 	
@@ -477,12 +486,12 @@ function rolldX() {
 	   dtotal = dtotal + dX.toString() + ","	
   	}
 
-	if (dXpm == 0) {
+	if (dXpm === 0) {
        dXres = dXres + dXmod;	
 	   dtotal = dtotal + "+" + dXmod + "\n" + "总计:" + dXres	
 	}	
  
-	if (dXpm == 1) {
+	if (dXpm === 1) {
        dXres = dXres - dXmod;
 	   if (dXres <= minimumvalue) {
 	      dXres = minimumvalue;
@@ -497,7 +506,8 @@ function rolldX() {
     }else{
         document.form1.dXr.value = dXres;
         rtotal = "暗投" + dtotal + "\n\n" + rtotal;
-        document.form1.runningtotal.value = rtotal;
+      websocket.send("kp执行了暗投");
+      document.form1.runningtotal.value = rtotal;
     }
 }
 
@@ -521,7 +531,7 @@ function MM_preloadimages() { //v2.0
 function MM_swapImage() { //v2.0
   var i,j=0,objStr,obj,swapArray=new Array,oldArray=document.MM_swapImgData;
   for (i=0; i < (MM_swapImage.arguments.length-2); i+=3) {
-    objStr = MM_swapImage.arguments[(navigator.appName == 'Netscape')?i:i+1];
+    objStr = MM_swapImage.arguments[(navigator.appName === 'Netscape')?i:i+1];
     if ((objStr.indexOf('document.layers[')==0 && document.layers==null) ||
         (objStr.indexOf('document.all[')   ==0 && document.all   ==null))
       objStr = 'document'+objStr.substring(objStr.lastIndexOf('.'),objStr.length);
@@ -577,8 +587,8 @@ color: #ffffff
 
 <body bgcolor="#FFFFFF" background="/images/back2.jpg">
 
-<div style="background-color:#000000; width: 500"align="center"><font face="Arial, Helvetica, sans-serif" size="2"><b><font color="#FFFFCC">克苏鲁的呼唤登录</font></b></font></div>
-<div style="background-color:#ffffff; width: 500; height: 50;" align="center">
+<div style="background-color:#000000; width: 600"align="center"><font face="Arial, Helvetica, sans-serif" size="2"><b><font color="#FFFFCC">克苏鲁的呼唤登录</font></b></font></div>
+<div style="background-color:#ffffff; width: 600; height: 50;" align="center">
 <span style="top:50%;">请输入昵称：</span>
 <input id="nickName" type="text" />&nbsp;&nbsp;&nbsp;<button onclick="openConnect()">连接</button> &nbsp;&nbsp;&nbsp;<button onclick="closeWebSocket()">Close</button>
 <div id="message">
@@ -587,7 +597,7 @@ color: #ffffff
 
 <form method="post" action="" name="form1">
 
-  <table width="500" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+  <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
     <tr bgcolor="#000000" align="center" valign="middle"> 
       <td colspan="3" height="17"> 
         <div align="center"><font face="Arial, Helvetica, sans-serif" size="2"><b><font color="#FFFFCC">克苏鲁的呼唤掷骰器</font></b></font></div>

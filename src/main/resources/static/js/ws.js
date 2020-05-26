@@ -11,7 +11,7 @@ function openConnect(){
 		return;
 	}
 	if('WebSocket' in window){
-		websocket = new WebSocket("ws://182.61.36.189/websocket/" + message);
+		websocket = new WebSocket("ws://127.0.0.1:8080/websocket/" + message);
 		//连接发生错误的回调方法
 		websocket.onerror = function(){
 			setMessageInnerHTML("error");
