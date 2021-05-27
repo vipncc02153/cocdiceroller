@@ -6,12 +6,13 @@ function openConnect(){
 		return;
 	}
 	var message = document.getElementById('nickName').value;
+	var url = location.host;
 	if(message==null||message=='') {
 		alert("必须输入昵称");
 		return;
 	}
 	if('WebSocket' in window){
-		websocket = new WebSocket("ws://127.0.0.1:8080/websocket/" + message);
+		websocket = new WebSocket("ws://" + url + "/websocket/" + message);
 		//连接发生错误的回调方法
 		websocket.onerror = function(){
 			setMessageInnerHTML("error");

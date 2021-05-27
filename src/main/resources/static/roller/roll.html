@@ -12,6 +12,7 @@ minimumvalue = 1; // The minimum value that can be rolled by a die is set here
 rnd.today=new Date();
 rnd.seed=rnd.today.getTime();
 var kpflag=0;
+var numFlag = 0;
 
 function clickCheckbox()
 {
@@ -19,6 +20,11 @@ function clickCheckbox()
         kpflag = 1;
     }else{
         kpflag = 0;
+    }
+    if(document.getElementById('numRoll').checked){
+        numFlag = 1;
+    }else{
+        numFlag = 0;
     }
 }
 
@@ -117,7 +123,9 @@ function rolld6() {
    d6mod = parseInt(document.form1.d6mo.value);  
    dtotal = ""
    d6res = 0
-   rtotal = document.form1.runningtotal.value; 
+   rtotal = document.form1.runningtotal.value;
+   d6Success = 0
+   d6Fail = 0
   
 	for (i=0; i<2; i++) {
 		if (document.form1.d6m[i].checked) {
@@ -134,24 +142,47 @@ function rolld6() {
 	
 	for (r=0; r<d6rolls; r++) {
        var d6 = Math.floor((Math.random() * 6) + 1);	
-       d6res = d6res + d6;	
+       d6res = d6res + d6;
+       if(d6 === 1){
+         d6Fail = d6Fail + 1;
+       }
+       if(d6 >= 5){
+         d6Success = d6Success + 1;
+       }
 	   dtotal = dtotal + d6.toString() + ","	
   	}
 
-	if (d6pm === 0) {
-       d6res = d6res + d6mod;	
-	   dtotal = dtotal + "+" + d6mod + "\n" + "总计:" + d6res	
-	}	
- 
-	if (d6pm === 1) {
-       d6res = d6res - d6mod;
-	   if (d6res <= minimumvalue) {
-	      d6res = minimumvalue;
-		  }	
-	   dtotal = dtotal + "-" + d6mod + "\n" + "总计:" + d6res	
-	}
+	if(numFlag === 0) {
+      if (d6pm === 0) {
+        d6res = d6res + d6mod;
+        dtotal = dtotal + "+" + d6mod + "\n" + "总计:" + d6res
+      }
 
-    if(kpflag==0){
+      if (d6pm === 1) {
+        d6res = d6res - d6mod;
+        if (d6res <= minimumvalue) {
+          d6res = minimumvalue;
+        }
+        dtotal = dtotal + "-" + d6mod + "\n" + "总计:" + d6res
+      }
+    }else{
+	  var successStr = '';
+	  if(d6Success >= 2 && d6Success <= 3){
+        successStr = "一般成功";
+      }
+      if(d6Success >= 4 && d6Success <= 5){
+        successStr = "困难成功";
+      }
+      if(d6Success >= 6 && d6Success <= 7){
+        successStr = "极难成功";
+      }
+      if(d6Success >= 8){
+        successStr = "过分成功";
+      }
+
+    }
+
+    if(kpflag===0){
         document.form1.d6r.value = d6res;
         rtotal = dtotal + "\n\n" + rtotal;
         websocket.send(dtotal);
@@ -461,7 +492,7 @@ function rolldX() {
    dtotal = ""
    dXres = 0
 
-    if(dXrolls>10){
+    if(dXrolls>100){
        alert("大佬，你真的用投这么多骰子吗？不给！");
        return;
     }
@@ -624,7 +655,7 @@ color: #ffffff
             <td align="center">&nbsp;</td>
             <td align="center" valign="bottom"><font size="2" face="Arial, Helvetica, sans-serif"><b>结果</b></font></td>
             <td align="center">&nbsp;</td>
-            <td align="center" valign="bottom"><input type="checkbox" onclick="clickCheckbox()" id="kproll"><font size="2" face="Arial, Helvetica, sans-serif"><b>暗投</b></font></td>
+            <td align="center" valign="bottom"><input type="checkbox" onclick="clickCheckbox()" id="numRoll"><font size="2" face="Arial, Helvetica, sans-serif"><b>数骰</b></font><input type="checkbox" onclick="clickCheckbox()" id="kproll"><font size="2" face="Arial, Helvetica, sans-serif"><b>暗投</b></font></td>
             <td align="center">&nbsp;</td>
             <td>&nbsp;</td>
           </tr>

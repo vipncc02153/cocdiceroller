@@ -6,7 +6,7 @@
     <groupId>per.coc.dice</groupId>
     <artifactId>roller</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>roller</name>
     <description>Demo project for Spring Boot</description>
@@ -43,6 +43,11 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
