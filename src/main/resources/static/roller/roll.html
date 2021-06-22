@@ -126,6 +126,7 @@ function rolld6() {
    rtotal = document.form1.runningtotal.value;
    d6Success = 0
    d6Fail = 0
+   var myarray=new Array(d6rolls);;
   
 	for (i=0; i<2; i++) {
 		if (document.form1.d6m[i].checked) {
@@ -141,7 +142,8 @@ function rolld6() {
 	}	
 	
 	for (r=0; r<d6rolls; r++) {
-       var d6 = Math.floor((Math.random() * 6) + 1);	
+       var d6 = Math.floor((Math.random() * 6) + 1);
+       myarray[r] = d6;
        d6res = d6res + d6;
        if(d6 === 1){
          d6Fail = d6Fail + 1;
@@ -166,7 +168,8 @@ function rolld6() {
         dtotal = dtotal + "-" + d6mod + "\n" + "总计:" + d6res
       }
     }else{
-	  var successStr = '';
+	  var successStr = '未成功';
+	  var failStr = '未失败';
 	  if(d6Success >= 2 && d6Success <= 3){
         successStr = "一般成功";
       }
@@ -179,7 +182,14 @@ function rolld6() {
       if(d6Success >= 8){
         successStr = "过分成功";
       }
-
+      if(d6Fail > 0 && d6Fail * 2 >= d6rolls){
+        if(d6Success < 2){
+          failStr = "大失败";
+        }else{
+          failStr = "失败";
+        }
+      }
+      dtotal = "数骰结果: \n5/6骰子个数为:" + d6Success + "\n1骰子个数为:" + d6Fail + "\n全部结果骰子为:" + myarray + "\n结果为:" + successStr + "/" + failStr;
     }
 
     if(kpflag===0){
@@ -574,7 +584,7 @@ function MM_swapImage() { //v2.0
   } }
   document.MM_swapImgData = swapArray; //used for restore
 }
-//-->
+-->
 </script>
 </head>
 <style type="text/css">
@@ -681,11 +691,11 @@ color: #ffffff
             </td>
             <td rowspan="13" valign="top" align="center"> <img src="/images/white.gif" width="3" height="5"><br>
               <textarea name="runningtotal" cols="25" rows="17"></textarea>
-									<SCRIPT LANGUAGE="JavaScript1.2">
-<!--
-document.form1.runningtotal.value = "     记录\n-------------------------\n这个区域将会显示你的掷骰记录.\n\n将根据给定的x、y、z生成一个掷骰结果."
-//-->
-</script>            		
+				<SCRIPT LANGUAGE="JavaScript1.2">
+                  <!--
+                  document.form1.runningtotal.value = "     记录\n-------------------------\n这个区域将会显示你的掷骰记录.\n\n将根据给定的x、y、z生成一个掷骰结果."
+                  -->
+                </script>
             </td>
           </tr>
           <tr> 

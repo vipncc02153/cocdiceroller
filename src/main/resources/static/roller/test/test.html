@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>菜鸟教程 React 实例</title>
+  <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+  <style>
+    .foo{
+      color:red;
+    }
+  </style>
+</head>
+<body>
+
+<script type="text/babel">
+  function HelloMessage(props) {
+    return <h1>Hello World!</h1>;
+  }
+
+  function ListItem(props) {
+    // 对啦！这里不需要指定key:
+    return <li>{props.value}</li>;
+  }
+
+  function NumberList(props) {
+    const numbers = props.numbers;
+    const listItems = numbers.map((number) =>
+            // 又对啦！key应该在数组的上下文中被指定
+            <ListItem key={number.toString()}
+                      value={number} />
+    );
+    return (
+            <ul>
+              {listItems}
+            </ul>
+    );
+  }
+
+  const component = <HelloMessage />;
+
+  const element1 = <h1 className="foo">Hello, world</h1>;
+
+
+  ReactDOM.render(element1, document.getElementById('root'));
+
+  ReactDOM.render(
+          component,
+          document.getElementById('component')
+  );
+
+  const numbers = [1, 2, 3, 4, 5];
+  ReactDOM.render(
+          <NumberList numbers={numbers} />,
+          document.getElementById('list')
+  );
+
+</script>
+
+<div id="root"></div>
+<div id="component"></div>
+<div id="list"></div>
+
+</body>
+</html>

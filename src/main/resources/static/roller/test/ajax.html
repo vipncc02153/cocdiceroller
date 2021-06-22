@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <style>
+
+        .show{
+            width:30px;
+            height:30px;
+            border:solid 1px pink;
+            position:absolute;
+            text-align: center;
+            display: none;
+        }
+    </style>
+    <script>
+        function loadXMLDoc()
+        {
+            var xmlhttp;
+            const num = document.getElementById("result").value;
+            if (window.XMLHttpRequest)
+            {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp=new XMLHttpRequest();
+            }
+            xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState===4 && xmlhttp.status===200) {
+                    const response= xmlhttp.response;
+                    document.getElementById("result3").innerHTML = value1;
+                    changeList(response);
+                }
+            }
+            xmlhttp.open("GET","http://localhost:8080/excel/excelShow2" + "?rangeSpeed=" + num, true);
+            xmlhttp.send();
+        }
+
+        function changeSpeed(response) {
+            document.getElementById("result3").innerHTML = response;
+        };
+    </script>
+</head>
+<body>
+
+
+<div class="chart-container" style="position: relative; height:30vh; width:25vw">
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>
+
+    var list = [];
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myChart = new Chart(ctx, {
+        type: 'line', // line 表示是 曲线图，当然也可以设置其他的图表类型 如柱形图 : bar  或者其他
+        data: {
+            labels : ["January","February","March","April","May","June","July"], //按时间段 可以按星期，按月，按年
+            datasets : [{
+                label: "123",  //当前数据的说明
+                fill: true,  //是否要显示数据部分阴影面积块  false:不显示
+                borderColor: "rgba(200,187,205,1)",//数据曲线颜色
+                pointBackgroundColor: "#fff", //数据点的颜色
+                data: list, //填充的数据
+            }, {
+                label: "456",  //当前数据的说明
+                fill: true,  //是否要显示数据部分阴影面积块  false:不显示
+                borderColor: "rgba(75,192,192,1)",//数据曲线颜色
+                pointBackgroundColor: "#fff", //数据点的颜色
+                data: [0, 34, 10, 50, 45, 21, 20],  //填充的数据
+            }]
+        }
+    });
+
+    function changeList(response) {
+        myChart.data.datasets[0].data = JSON.parse(response);
+        myChart.update();
+    };
+</script>
+
+<div id="myDiv">
+    <input id="result" type="range" oninput="changeSpeed(value)" onchange="loadXMLDoc()"/>
+    <span id="result3"></span>
+</div>
+
+
+
+</body>
+</html>

@@ -47,4 +47,17 @@ public class RollerController {
             System.out.println(e);
         }
     }
+
+    @RequestMapping("helloWorld")
+    @ResponseBody
+    public String helloWorld(){
+        String message = "系统提示：你被杀了";
+        return message;
+    }
+
+    @RequestMapping("getText")
+    @ResponseBody
+    public String getText(String text){
+        return "收到了你的传参：text=" + text;
+    }
 }
